@@ -1,5 +1,7 @@
 package roujo.emily.commands;
 
+import roujo.emily.Emily;
+
 public abstract class Command {
 	private final String name;
 	private final String description;
@@ -29,7 +31,7 @@ public abstract class Command {
 		return isSuperUserOnly;
 	}
 	
-	public abstract boolean execute(String sender, String arguments);
+	public abstract boolean execute(Emily emily, String sender, String arguments);
 	
 	public boolean isValidSender(String sender) {
 		User user = User.getUserByNick(sender);
