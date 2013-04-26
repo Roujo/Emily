@@ -33,7 +33,7 @@ public abstract class Command {
 	
 	public abstract boolean execute(Context context);
 	
-	public boolean isValidSender(String sender) {
+	protected boolean isValidSender(String sender) {
 		User user = User.getUserByNick(sender);
 		if(isSuperUserOnly) {
 			return user != null && user.getStatus() == User.Status.Super;
@@ -42,7 +42,11 @@ public abstract class Command {
 		}
 	}
 	
-	public void LogError(Context context, String message) {
+	protected void logError(Context context, String message) {
 		context.getEmily().sendMessage(context.getSender(), message);
+	}
+	
+	protected void sendMessageBack(Context context, String message) {
+		context.getEmily().sendMessage(context.isPrivateMessage() ? context.getSender() : context.getChannel(), message);
 	}
 }
