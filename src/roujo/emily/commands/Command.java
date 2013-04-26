@@ -41,4 +41,8 @@ public abstract class Command {
 			return user == null || user.getStatus() != User.Status.BlackListed;
 		}
 	}
+	
+	public void LogError(Context context, String message) {
+		context.getEmily().sendMessage(context.getSender(), message);
+	}
 }
