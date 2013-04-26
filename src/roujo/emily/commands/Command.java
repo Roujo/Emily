@@ -29,7 +29,7 @@ public abstract class Command {
 		return isSuperUserOnly;
 	}
 	
-	public abstract void execute(String sender, String arguments);
+	public abstract boolean execute(String sender, String arguments);
 	
 	public boolean isValidSender(String sender) {
 		User user = User.getUserByNick(sender);
