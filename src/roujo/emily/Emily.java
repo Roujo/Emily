@@ -85,7 +85,8 @@ public class Emily extends PircBot {
 		command = command.toLowerCase();
 
 		boolean isSuperUser = sender.equals("Console")
-				|| sender.equals("Skynet");
+				|| sender.equals("Skynet")
+				|| sender.equals("Skynet|Work");
 		// SuperUser commands only
 		if (isSuperUser) {
 			switch (command) {
@@ -98,8 +99,9 @@ public class Emily extends PircBot {
 				partChannel(restOfMessage);
 				break;
 			case "say":
-				String[] args = restOfMessage.split(" ");
-				sendMessage(args[0], args[1]);
+				int separator = restOfMessage.indexOf(' ');
+				sendMessage(restOfMessage.substring(0, separator), restOfMessage.substring(separator + 1));
+				break;
 			}
 		}
 		if(response.equals("")){
@@ -159,7 +161,7 @@ public class Emily extends PircBot {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			disconnect();
+			quitServer();
 		}
 	}
 }

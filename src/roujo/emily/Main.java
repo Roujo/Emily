@@ -11,11 +11,27 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Emily emily = new Emily(args.length > 0 ? args[0] : "Emily");
-		emily.setVerbose(true);
-
 		BufferedReader reader = new BufferedReader(new InputStreamReader(
 				System.in));
+		Emily emily;
+		if(args.length == 0) {
+			String name;
+			System.out.println("Emily: How would you like to name me? [Emily]");
+			try {
+				name = reader.readLine();
+				if(name.equals(""))
+					name = "Emily";
+			} catch (IOException e) {
+				logError(e);
+				System.out.println("Emily: I'll just call myself Emily, mmkay? =)");
+				name = "Emily";
+			}
+			emily = new Emily(name);
+		} else {
+			emily = new Emily(args[0]);
+		}
+		emily.setVerbose(true);
+
 		if (args.length < 2) {
 			System.out.println("Emily: Where should I connect? =)");
 			String address;
