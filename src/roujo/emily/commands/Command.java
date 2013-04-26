@@ -36,9 +36,9 @@ public abstract class Command {
 	protected boolean isValidSender(String sender) {
 		User user = User.getUserByNick(sender);
 		if(isSuperUserOnly) {
-			return user != null && user.getStatus() == User.Status.Super;
+			return user != null && user.isSuper();
 		} else {
-			return user == null || user.getStatus() != User.Status.BlackListed;
+			return user == null || !user.isBlackListed();
 		}
 	}
 	
@@ -47,6 +47,11 @@ public abstract class Command {
 	}
 	
 	protected void sendMessageBack(Context context, String message) {
+		// Add a little love
+		User user = context.getUser();
+		if(user != null && user.isOwner())
+			message += " <3";
+		
 		context.getEmily().sendMessage(context.isPrivateMessage() ? context.getSender() : context.getChannel(), message);
 	}
 }
