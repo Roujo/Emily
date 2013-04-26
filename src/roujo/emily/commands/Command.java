@@ -1,6 +1,6 @@
 package roujo.emily.commands;
 
-import roujo.emily.Emily;
+import roujo.emily.Context;
 
 public abstract class Command {
 	private final String name;
@@ -31,7 +31,7 @@ public abstract class Command {
 		return isSuperUserOnly;
 	}
 	
-	public abstract boolean execute(Emily emily, String sender, String arguments);
+	public abstract boolean execute(Context context);
 	
 	public boolean isValidSender(String sender) {
 		User user = User.getUserByNick(sender);
