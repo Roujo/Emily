@@ -28,17 +28,17 @@ public enum User {
 
 	public static boolean isSuper(String nick) {
 		User user = getUserByNick(nick);
-		return user != null && user.status.rank >= Status.Super.rank;
+		return user != null && user.isSuper();
 	}
 	
 	public static boolean isOwner(String nick) {
 		User user = getUserByNick(nick);
-		return user != null && user.status.rank >= Status.Owner.rank;
+		return user != null && user.isOwner();
 	}
 	
 	public static boolean isBlackListed(String nick) {
 		User user = getUserByNick(nick);
-		return user != null && user.status.rank <= Status.BlackListed.rank;
+		return user != null && user.isBlackListed();
 	}
 
 	public static void registerNicks(User user, String[] nicks) {
@@ -46,8 +46,8 @@ public enum User {
 			NICK_MAP.put(nick, user);
 	}
 
-	private Status status;
-	private String[] nicks;
+	private final Status status;
+	private final String[] nicks;
 
 	private User(Status status, String[] nicks) {
 		this.status = status;
@@ -63,15 +63,19 @@ public enum User {
 		return status;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
 	public String[] getAliases() {
 		return nicks;
 	}
-
-	public void setAliases(String[] aliases) {
-		this.nicks = aliases;
+	
+	public boolean isOwner() {
+		return status.rank >= Status.Owner.rank;
+	}
+	
+	public boolean isSuper() {
+		return status.rank >= Status.Super.rank;
+	}
+	
+	public boolean isBlackListed() {
+		return status.rank <= Status.BlackListed.rank;
 	}
 }
