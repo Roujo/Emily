@@ -3,11 +3,13 @@ package roujo.emily.commands;
 public abstract class Command {
 	private final String name;
 	private final String description;
+	private final String usage;
 	private final boolean isSuperUserOnly;
 	
-	protected Command(String name, String description, boolean isSuperUserOnly) {
+	protected Command(String name, String description, String usage, boolean isSuperUserOnly) {
 		this.name = name;
 		this.description = description;
+		this.usage = usage;
 		this.isSuperUserOnly = isSuperUserOnly;
 	}
 
@@ -17,6 +19,10 @@ public abstract class Command {
 
 	public String getDescription() {
 		return description;
+	}
+	
+	public String getUsage() {
+		return usage;
 	}
 
 	public boolean isSuperUserOnly() {
