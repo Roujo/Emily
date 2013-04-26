@@ -30,4 +30,13 @@ public abstract class Command {
 	}
 	
 	public abstract void execute(String sender, String arguments);
+	
+	public boolean isValidSender(String sender) {
+		User user = User.getUserByNick(sender);
+		if(isSuperUserOnly) {
+			return user != null && user.getStatus() == User.Status.Super;
+		} else {
+			return user == null || user.getStatus() != User.Status.BlackListed;
+		}
+	}
 }
