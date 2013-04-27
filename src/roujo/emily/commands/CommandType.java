@@ -8,7 +8,8 @@ public enum CommandType {
 	
 	Time(new TimeCommand()),
 	Roll(new RollCommand()),
-	Hats(new HatsCommand());
+	Hats(new HatsCommand()),
+	Echo(new EchoCommand());
 	
 	public static Command getByName(String name) {
 		for(CommandType type : CommandType.values())
