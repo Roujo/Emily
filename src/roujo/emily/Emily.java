@@ -5,7 +5,7 @@ import java.util.Random;
 import org.jibble.pircbot.PircBot;
 
 public class Emily extends PircBot {
-	private boolean shouldQuit;
+	private State state;
 	private String password;
 
 	public Emily(String nickname, String password) {
@@ -15,14 +15,12 @@ public class Emily extends PircBot {
 		setAutoNickChange(true);
 		setLogin("Emily");
 		setVersion("Emily v0.1 | IRC Bot based on PircBot 1.5.0");
-
-		shouldQuit = false;
 	}
 
 	@Override
 	public void onMessage(String channel, String sender, String login,
 			String hostname, String message) {
-		if (shouldQuit)
+		if (state.shouldQuit())
 			return;
 
 		boolean isValidMessage = false;
@@ -55,7 +53,7 @@ public class Emily extends PircBot {
 	@Override
 	protected void onPrivateMessage(String sender, String login,
 			String hostname, String message) {
-		if (shouldQuit)
+		if (state.shouldQuit())
 			return;
 
 		String answer = processMessage(sender, message, true);
@@ -69,6 +67,10 @@ public class Emily extends PircBot {
 		if (!answer.equals(""))
 			System.out.println("Emily: " + answer);
 		postProcessMessage();
+	}
+	
+	public State getState() {
+		return state;
 	}
 	
 	@Override
@@ -146,7 +148,7 @@ public class Emily extends PircBot {
 					response = "Nice try. ;)";
 				} else {
 					response = "Alright!";
-					this.shouldQuit = true;
+					state.setShouldQuit(true);
 				}
 				break;
 			default:
@@ -163,7 +165,7 @@ public class Emily extends PircBot {
 	}
 
 	private void postProcessMessage() {
-		if (shouldQuit) {
+		if (state.shouldQuit()) {
 			for (String channel : getChannels())
 				sendMessage(channel, "Cya later, boys!");
 			try {
