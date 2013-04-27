@@ -52,6 +52,13 @@ public abstract class Command {
 		if(user != null && user.isOwner())
 			message += " <3";
 		
-		context.getEmily().sendMessage(context.isPrivateMessage() ? context.getSender() : context.getChannel(), message);
+		if(context.isPrivateMessage())
+			context.getEmily().sendMessage(context.getSender(), message);
+		else
+			context.getEmily().sendMessage(context.getChannel(), context.getSender() + ": " + message);
+	}
+	
+	protected void sendUsageBack(Context context) {
+		sendMessageBack(context, usage);
 	}
 }
