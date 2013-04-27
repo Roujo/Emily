@@ -4,6 +4,7 @@ public enum CommandType {
 	Join(new JoinCommand()),
 	Part(new PartCommand()),
 	Quit(new QuitCommand()),
+	Tell(new TellCommand()),
 	
 	Time(new TimeCommand()),
 	Roll(new RollCommand()),
