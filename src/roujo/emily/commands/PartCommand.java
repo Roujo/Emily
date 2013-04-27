@@ -16,12 +16,16 @@ public class PartCommand extends Command {
 			return false;
 		
 		String message = context.getMessage();
-		if(message.equals(""))
+		if(message.equals("")) {
 			sendUsageBack(context);
+			return false;
+		}
 		
 		String[] args = context.getMessage().split(" ");
-		if(!StringValidator.isChannel(args[0]))
-			logError(context, "I'm sorry, but \"" + args[0] + "\" doesn't look like a channel name.");
+		if(!StringValidator.isChannel(args[0])) {
+			sendUsageBack(context);
+			return false;
+		}
 		
 		Emily emily = context.getEmily();
 		sendMessageBack(context, "Alright!");
