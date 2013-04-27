@@ -11,7 +11,7 @@ public class CommandHandler {
 		if(!command.isValidSender(context.getSender()))
 			return false;
 		else
-			return command.execute(context);
+			return command.execute(context, messageParts[1]);
 	}
 
 	private static String[] splitCommandFromArguments(String message) {

@@ -13,14 +13,13 @@ public class RollCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
-		String message = context.getMessage();
-		if (message.equals("")) {
+	public boolean execute(Context context, String arguments) {
+		if (arguments.equals("")) {
 			sendUsageBack(context);
 			return false;
 		}
 
-		String[] args = message.split(" ");
+		String[] args = arguments.split(" ");
 		if (args[0].matches("[0-9]+d[0-9]+")) {
 			sendUsageBack(context);
 			return false;

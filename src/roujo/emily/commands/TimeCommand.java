@@ -9,7 +9,7 @@ public class TimeCommand extends Command {
 	}
 	
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(Context context, String arguments) {
 		String time = new java.util.Date().toString();
 		sendMessageBack(context, "The time is now " + time);
 		return true;

@@ -11,9 +11,9 @@ public class JoinCommand extends Command {
 	}
 	
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(Context context, String arguments) {
 		// Validating arguments
-		String[] channels = StringHelper.keepChannels(context.getMessage().split(" "));
+		String[] channels = StringHelper.keepChannels(arguments.split(" "));
 		if(channels.length == 0) {
 			logError(context, "No valid channels were passed.");
 			return false;

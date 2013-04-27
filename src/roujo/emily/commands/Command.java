@@ -31,7 +31,7 @@ public abstract class Command {
 		return isSuperUserOnly;
 	}
 	
-	public abstract boolean execute(Context context);
+	public abstract boolean execute(Context context, String arguments);
 	
 	protected boolean isValidSender(String sender) {
 		User user = User.getUserByNick(sender);

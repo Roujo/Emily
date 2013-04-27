@@ -11,14 +11,13 @@ public class PartCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
-		String message = context.getMessage();
-		if(message.equals("")) {
+	public boolean execute(Context context, String arguments) {
+		if(arguments.equals("")) {
 			sendUsageBack(context);
 			return false;
 		}
 		
-		String[] args = context.getMessage().split(" ");
+		String[] args = arguments.split(" ");
 		if(!StringHelper.isChannel(args[0])) {
 			sendUsageBack(context);
 			return false;

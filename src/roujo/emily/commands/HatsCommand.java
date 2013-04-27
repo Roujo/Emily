@@ -9,7 +9,7 @@ public class HatsCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(Context context, String arguments) {
 		sendMessageBack(context, "no u");
 		return true;
 	}
