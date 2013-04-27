@@ -9,6 +9,12 @@ public enum CommandType {
 	Roll(new RollCommand()),
 	Hats(new HatsCommand());
 	
+	public static Command getByName(String name) {
+		for(CommandType type : CommandType.values())
+			if(type.getCommand().getName().equals(name))
+				return type.getCommand();
+		return null;
+	}
 	
 	private final Command command;
 	
