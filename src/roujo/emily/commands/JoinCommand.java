@@ -12,11 +12,6 @@ public class JoinCommand extends Command {
 	
 	@Override
 	public boolean execute(Context context) {
-		String sender = context.getSender();
-		// Checking sender
-		if(!isValidSender(sender))
-			return false;
-		
 		// Validating arguments
 		String[] channels = StringValidator.keepChannels(context.getMessage().split(" "));
 		if(channels.length == 0) {

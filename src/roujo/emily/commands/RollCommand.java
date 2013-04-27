@@ -14,9 +14,6 @@ public class RollCommand extends Command {
 
 	@Override
 	public boolean execute(Context context) {
-		if (!isValidSender(context.getSender()))
-			return false;
-
 		String message = context.getMessage();
 		if (message.equals("")) {
 			sendUsageBack(context);

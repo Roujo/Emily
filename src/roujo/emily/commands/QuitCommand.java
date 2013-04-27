@@ -11,9 +11,6 @@ public class QuitCommand extends Command {
 
 	@Override
 	public boolean execute(Context context) {
-		if(!isValidSender(context.getSender()))
-			return false;
-		
 		Emily emily = context.getEmily();
 		sendMessageBack(context, "Alright, off I go!");
 		emily.getState().setShouldQuit(true);

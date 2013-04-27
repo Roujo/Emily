@@ -10,9 +10,6 @@ public class HatsCommand extends Command {
 
 	@Override
 	public boolean execute(Context context) {
-		if(!isValidSender(context.getSender()))
-			return false;
-		
 		sendMessageBack(context, "no u");
 		return true;
 	}
