@@ -20,7 +20,7 @@ public class RollCommand extends Command {
 		}
 
 		String[] args = arguments.split(" ");
-		if (args[0].matches("[0-9]+d[0-9]+")) {
+		if (!args[0].matches("[0-9]+d[0-9]+")) {
 			sendUsageBack(context);
 			return false;
 		}
