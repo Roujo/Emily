@@ -14,6 +14,11 @@ public class QuitCommand extends Command {
 		Emily emily = context.getEmily();
 		sendMessageBack(context, "Alright, off I go!");
 		emily.getState().setShouldQuit(true);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+		}
+		emily.quitServer("Later!");
 		return true;
 	}
 
