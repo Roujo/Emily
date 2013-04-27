@@ -1,7 +1,5 @@
 package roujo.emily.commands;
 
-import roujo.emily.Context;
-
 public enum CommandType {
 	Join(new JoinCommand()),
 	Part(new PartCommand()),
@@ -17,11 +15,8 @@ public enum CommandType {
 	private CommandType(Command command) {
 		this.command = command;
 	}
-
-	public boolean execute(Context context) {
-		if(command.isValidSender(context.getSender()))
-			return false;
-		else
-			return command.execute(context);
+	
+	public Command getCommand() {
+		return command;
 	}
 }
