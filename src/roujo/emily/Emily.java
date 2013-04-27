@@ -6,8 +6,11 @@ import org.jibble.pircbot.PircBot;
 
 public class Emily extends PircBot {
 	private boolean shouldQuit;
+	private String password;
 
-	public Emily(String nickname) {
+	public Emily(String nickname, String password) {
+		this.password = password;
+		
 		setName(nickname);
 		setAutoNickChange(true);
 		setLogin("Emily");
@@ -67,6 +70,12 @@ public class Emily extends PircBot {
 			System.out.println("Emily: " + answer);
 		postProcessMessage();
 	}
+	
+	@Override
+	protected void onConnect() {
+		if(!password.equals(""))
+			identify(password);
+	};
 
 	private String processMessage(String sender, String message,
 			boolean isPrivate) {
@@ -100,6 +109,7 @@ public class Emily extends PircBot {
 				break;
 			case "say":
 				int separator = restOfMessage.indexOf(' ');
+				response = "I'll just go and do that!";
 				sendMessage(restOfMessage.substring(0, separator), restOfMessage.substring(separator + 1));
 				break;
 			}

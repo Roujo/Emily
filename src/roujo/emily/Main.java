@@ -15,24 +15,26 @@ public class Main {
 				System.in));
 		Emily emily;
 		if(args.length == 0) {
-			String name;
-			System.out.println("Emily: How would you like to name me? [Emily]");
+			String name, password;
 			try {
+				System.out.println("Emily: How would you like to name me? [Emily]");
 				name = reader.readLine();
 				if(name.equals(""))
 					name = "Emily";
+				password = reader.readLine();
 			} catch (IOException e) {
 				logError(e);
 				System.out.println("Emily: I'll just call myself Emily, mmkay? =)");
 				name = "Emily";
+				password = "";
 			}
-			emily = new Emily(name);
+			emily = new Emily(name, password);
 		} else {
-			emily = new Emily(args[0]);
+			emily = new Emily(args[0], args[1]);
 		}
 		emily.setVerbose(true);
 
-		if (args.length < 2) {
+		if (args.length < 3) {
 			System.out.println("Emily: Where should I connect? =)");
 			String address;
 			try {
@@ -43,14 +45,14 @@ public class Main {
 				logError(e);
 			}
 		} else {
-			System.out.println("Emily: Connecting to " + args[1]);
+			System.out.println("Emily: Connecting to " + args[2]);
 			try {
-				emily.connect(args[1]);
+				emily.connect(args[2]);
 			} catch (Exception e) {
 				logError(e);
 			}
-			if (emily.isConnected() && args.length > 2) {
-				String[] channels = Arrays.copyOfRange(args, 2, args.length);
+			if (emily.isConnected() && args.length > 3) {
+				String[] channels = Arrays.copyOfRange(args, 3, args.length);
 				for (String channel : channels)
 					emily.joinChannel(channel);
 			}
