@@ -2,7 +2,7 @@ package roujo.emily.commands;
 
 import roujo.emily.Context;
 import roujo.emily.Emily;
-import roujo.emily.util.StringValidator;
+import roujo.emily.util.StringHelper;
 
 public class PartCommand extends Command {
 
@@ -19,7 +19,7 @@ public class PartCommand extends Command {
 		}
 		
 		String[] args = context.getMessage().split(" ");
-		if(!StringValidator.isChannel(args[0])) {
+		if(!StringHelper.isChannel(args[0])) {
 			sendUsageBack(context);
 			return false;
 		}

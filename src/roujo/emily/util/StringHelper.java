@@ -3,7 +3,7 @@ package roujo.emily.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringValidator {
+public class StringHelper {
 	public static boolean isChannel(String string) {
 		return string.matches("#[#A-z0-9]+");
 	}

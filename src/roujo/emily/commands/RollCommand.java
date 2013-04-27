@@ -3,7 +3,7 @@ package roujo.emily.commands;
 import java.util.Random;
 
 import roujo.emily.Context;
-import roujo.emily.util.StringValidator;
+import roujo.emily.util.StringHelper;
 
 public class RollCommand extends Command {
 
@@ -37,7 +37,7 @@ public class RollCommand extends Command {
 		String response = "Results of " + args[0] + ": " + total;
 		
 		if(args.length > 1) {
-			if(!StringValidator.isChannel(args[1])) {
+			if(!StringHelper.isChannel(args[1])) {
 				sendUsageBack(context);
 				return false;
 			}
