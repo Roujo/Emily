@@ -26,7 +26,10 @@ public class PartCommand extends Command {
 		Emily emily = context.getEmily();
 		sendMessageBack(context, "Alright!");
 		emily.sendMessage(args[0], "See you later!");
-		emily.partChannel(args[0], "Off and away...");
+		if(args.length > 1)
+			emily.partChannel(args[0], args[1]);
+		else
+			emily.partChannel(args[0], "Off and away...");
 		return true;
 	}
 
