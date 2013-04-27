@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum User {
-	Skynet(Status.Super, new String[] { "Skynet", "Skynet|Work" });
+	Skynet(Status.Owner, new String[] { "Skynet", "Skynet|Work" });
 
 	public enum Status {
 		Owner(10), Super(5), Regular(0), BlackListed(-1);
@@ -20,9 +20,11 @@ public enum User {
 		}
 	}
 
-	public static Map<String, User> NICK_MAP = new HashMap<String, User>();
+	public static Map<String, User> NICK_MAP;
 
 	public static User getUserByNick(String nick) {
+		if(NICK_MAP == null)
+			initializeNickMap();
 		return NICK_MAP.get(nick);
 	}
 
@@ -40,10 +42,12 @@ public enum User {
 		User user = getUserByNick(nick);
 		return user != null && user.isBlackListed();
 	}
-
-	public static void registerNicks(User user, String[] nicks) {
-		for (String nick : nicks)
-			NICK_MAP.put(nick, user);
+	
+	private static void initializeNickMap() {
+		NICK_MAP = new HashMap<String, User>();
+		for(User user : values())
+			for(String nick : user.nicks)
+				NICK_MAP.put(nick, user);
 	}
 
 	private final Status status;
@@ -52,7 +56,6 @@ public enum User {
 	private User(Status status, String[] nicks) {
 		this.status = status;
 		this.nicks = nicks;
-		registerNicks(this, nicks);
 	}
 
 	private User(Status status, String nick) {
