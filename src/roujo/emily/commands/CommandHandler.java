@@ -8,7 +8,7 @@ public class CommandHandler {
 		
 		Command command = CommandType.getByName(messageParts[0]);
 		
-		if(!command.isValidSender(context.getSender()))
+		if(command == null || !command.isValidSender(context.getSender()))
 			return false;
 		else
 			return command.execute(context, messageParts[1]);
