@@ -16,7 +16,7 @@ public class CommandHandler {
 
 	private static String[] splitCommandFromArguments(String message) {
 		int firstSpace = message.indexOf(' ');
-		boolean hasArgs = firstSpace != -1 && message.length() > firstSpace + 2;
+		boolean hasArgs = firstSpace != -1 && message.length() > firstSpace;
 		String command, arguments;
 		if (hasArgs) {
 			command = message.substring(0, firstSpace);
