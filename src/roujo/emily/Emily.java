@@ -1,81 +1,68 @@
 package roujo.emily;
 
-import org.jibble.pircbot.PircBot;
+import org.pircbotx.PircBotX;
+import org.pircbotx.hooks.ListenerAdapter;
+import org.pircbotx.hooks.events.ConnectEvent;
+import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.PrivateMessageEvent;
 
 import roujo.emily.commands.CommandHandler;
 
-public class Emily extends PircBot {
+public class Emily extends ListenerAdapter<PircBotX>{
 	private State state;
 	private String password;
+	private PircBotX bot;
 
 	public Emily(String nickname, String password) {
 		this.password = password;
 		this.state = new State();
+		this.bot = new PircBotX();
+		this.bot.getListenerManager().addListener(this);
+		this.bot.setCapEnabled(true);
 		
-		setName(nickname);
-		setAutoNickChange(true);
-		setLogin("Emily");
-		setVersion("Emily v0.1 | IRC Bot based on PircBot 1.5.0");
+		bot.setName(nickname);
+		bot.setAutoNickChange(true);
+		bot.setLogin("Emily");
+		bot.setVersion("Emily v0.2 | IRC Bot based on PircBotX 1.9");
 	}
 
 	@Override
-	public void onMessage(String channel, String sender, String login,
-			String hostname, String message) {
+	public void onConnect(ConnectEvent<PircBotX> event) throws Exception {
+		if(!password.equals(""))
+			bot.identify(password);
+	};
+	
+	@Override
+	public void onMessage(MessageEvent<PircBotX> event) throws Exception {
 		if (state.shouldQuit())
 			return;
 
-		message = formatInboundMessage(message);
-
-		if (!message.equals("")) {
-			Context context = new Context(this, channel, sender, message);
+		if (event.getMessage().matches("%.+") || event.getMessage().matches("Aurora(,|:) .+")) {
+			Context context = new Context(state, event);
 			CommandHandler.processMessage(context);
 		}
 	}
 
 	@Override
-	protected void onPrivateMessage(String sender, String login,
-			String hostname, String message) {
+	public void onPrivateMessage(PrivateMessageEvent<PircBotX> event) throws Exception {
 		if (state.shouldQuit())
 			return;
 
-		Context context = new Context(this, sender, message);
+		Context context = new Context(state, event);
 		CommandHandler.processMessage(context);
 	}
 
-	public void onConsoleMessage(String message) {
+	// Has to be reworked, so removed for now
+	/*public void onConsoleMessage(String message) {
 		Context context = new Context(this, getNick(), message);
 		CommandHandler.processMessage(context);
-	}
-	
-	@Override
-	protected void onConnect() {
-		if(!password.equals(""))
-			identify(password);
-	};
+	}*/
 	
 	public State getState() {
 		return state;
 	}
 	
-	private String formatInboundMessage(String message) {
-		boolean isInboundMessage = false;
-		if (message.startsWith("%")) {
-			// Emily was called by prefix
-			isInboundMessage = true;
-			message = message.substring(1);
-		} else if (message.startsWith(getNick())) {
-			// Emily was reffered to by name
-			int nickLength = getNick().length();
-			// NickLength + 2, so that messages like "Emily, q" or "Emily: d"
-			// work as intended
-			if (message.length() > nickLength + 2) {
-				if (message.charAt(nickLength) == ','
-						|| message.charAt(nickLength) == ':') {
-					isInboundMessage = true;
-					message = message.substring(nickLength + 2);
-				}
-			}
-		}
-		return isInboundMessage ? message : "";
+	public PircBotX getBot() {
+		return bot;
 	}
 }

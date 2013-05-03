@@ -1,6 +1,7 @@
 package roujo.emily.commands;
+import org.pircbotx.PircBotX;
+
 import roujo.emily.Context;
-import roujo.emily.Emily;
 
 
 public class TellCommand extends Command {
@@ -21,8 +22,8 @@ public class TellCommand extends Command {
 		String target = arguments.substring(0, firstSpace);
 		String message = arguments.substring(firstSpace + 1).trim();
 		
-		Emily emily = context.getEmily();
-		emily.sendMessage(target, message);
+		PircBotX bot = context.getBot();
+		bot.sendMessage(target, message);
 		
 		return true;
 	}

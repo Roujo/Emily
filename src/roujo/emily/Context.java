@@ -1,38 +1,57 @@
 package roujo.emily;
 
-import roujo.emily.commands.User;
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+import org.pircbotx.User;
+import org.pircbotx.hooks.events.MessageEvent;
+import org.pircbotx.hooks.events.PrivateMessageEvent;
+
+import roujo.emily.util.InternalUser;
+import roujo.emily.util.UserHelper;
 
 public class Context {
-	private final Emily emily;
+	private final State state;
+	private final PircBotX bot;
+	private final Channel channel;
 	private final User user;
-	private final String channel, sender, message;
+	private final InternalUser internalUser;
+	private final String message;
 
-	public Context(Emily emily, String channel, String sender, String message) {
-		this.emily = emily;
-		this.user = User.getUserByNick(sender);
+	public Context(State state, MessageEvent<PircBotX> event) {
+		this(state, event.getBot(), event.getChannel(), event.getUser(), event.getMessage());
+	}
+
+	public Context(State state, PrivateMessageEvent<PircBotX> event) {
+		this(state, event.getBot(), null, event.getUser(), event.getMessage());
+	}
+	
+	public Context(State state, PircBotX bot, Channel channel, User user, String message) {
+		this.state = state;
+		this.bot = bot;
 		this.channel = channel;
-		this.sender = sender;
+		this.user = user;
+		this.internalUser = UserHelper.getUserByNick(user.getNick());
 		this.message = message;
 	}
-
-	public Context(Emily emily, String sender, String message) {
-		this(emily, "", sender, message);
+	
+	public State getState() {
+		return state;
 	}
 	
-	public Emily getEmily() {
-		return emily;
-	}
-	
-	public User getUser() {
-		return user;
+	public PircBotX getBot() {
+		return bot;
 	}
 
-	public String getChannel() {
+	public Channel getChannel() {
 		return channel;
 	}
 
-	public String getSender() {
-		return sender;
+	public User getUser() {
+		return user;
+	}
+	
+	public InternalUser getInternalUser() {
+		return internalUser;
 	}
 
 	public String getMessage() {
@@ -40,6 +59,6 @@ public class Context {
 	}
 	
 	public boolean isPrivateMessage() {
-		return channel.equals("");
+		return channel == null;
 	}
 }

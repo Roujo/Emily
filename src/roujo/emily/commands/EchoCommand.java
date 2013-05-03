@@ -12,9 +12,9 @@ public class EchoCommand extends Command {
 	@Override
 	public boolean execute(Context context, String arguments) {
 		if(context.isPrivateMessage())
-			context.getEmily().sendMessage(context.getSender(), arguments);
+			context.getBot().sendMessage(context.getUser(), arguments);
 		else
-			context.getEmily().sendMessage(context.getChannel(), arguments);
+			context.getBot().sendMessage(context.getChannel(), arguments);
 		return true;
 	}
 

@@ -1,8 +1,9 @@
 package roujo.emily.commands;
 
+import org.pircbotx.Channel;
+import org.pircbotx.PircBotX;
+
 import roujo.emily.Context;
-import roujo.emily.Emily;
-import roujo.emily.util.StringHelper;
 
 public class PartCommand extends Command {
 
@@ -18,19 +19,20 @@ public class PartCommand extends Command {
 		}
 		
 		String[] args = arguments.split(" ");
-		if(!StringHelper.isChannel(args[0])) {
-			sendUsageBack(context);
-			return false;
+		PircBotX bot = context.getBot();
+		for(Channel channel : bot.getChannels()) {
+			if(channel.getName().equals(args[0])) {
+				sendMessageBack(context, "Alright!");
+				bot.sendMessage(args[0], "See you later!");
+				if(args.length > 1)
+					bot.partChannel(channel, args[1]);
+				else
+					bot.partChannel(channel, "Off and away...");
+				return true;
+			}
 		}
-		
-		Emily emily = context.getEmily();
-		sendMessageBack(context, "Alright!");
-		emily.sendMessage(args[0], "See you later!");
-		if(args.length > 1)
-			emily.partChannel(args[0], args[1]);
-		else
-			emily.partChannel(args[0], "Off and away...");
-		return true;
+		sendMessageBack(context, "I'm not in " + args[0] + " right now.");
+		return false;
 	}
 
 	

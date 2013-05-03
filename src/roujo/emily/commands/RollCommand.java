@@ -40,7 +40,7 @@ public class RollCommand extends Command {
 				sendUsageBack(context);
 				return false;
 			}
-			context.getEmily().sendMessage(args[1], response);
+			context.getBot().sendMessage(args[1], response);
 		} else {
 			sendMessageBack(context, response);
 		}

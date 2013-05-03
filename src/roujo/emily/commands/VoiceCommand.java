@@ -11,9 +11,9 @@ public class VoiceCommand extends Command {
 	@Override
 	public boolean execute(Context context, String arguments) {
 		if(context.isPrivateMessage() && arguments.matches("#[^ ,]+ [^# ,]+"))
-			context.getEmily().sendMessage("ChanServ", "voice " + arguments);
+			context.getBot().sendMessage("ChanServ", "voice " + arguments);
 		else if(!context.isPrivateMessage() && arguments.matches("[^# ,]+"))
-			context.getEmily().sendMessage("ChanServ", "voice " + context.getChannel() + " " + arguments);
+			context.getBot().sendMessage("ChanServ", "voice " + context.getChannel() + " " + arguments);
 		else
 			return false;
 		return true;

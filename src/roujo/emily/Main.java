@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
+import org.pircbotx.PircBotX;
+
 public class Main {
 
 	/**
@@ -32,7 +34,9 @@ public class Main {
 		} else {
 			emily = new Emily(args[0], args[1]);
 		}
-		emily.setVerbose(true);
+		
+		PircBotX bot = emily.getBot();
+		bot.setVerbose(true);
 
 		if (args.length < 3) {
 			System.out.println("Emily: Where should I connect? =)");
@@ -40,31 +44,32 @@ public class Main {
 			try {
 				address = reader.readLine();
 				System.out.println("Emily: Alright! =D");
-				emily.connect(address);
+				bot.connect(address);
 			} catch (Exception e) {
 				logError(e);
 			}
 		} else {
 			System.out.println("Emily: Connecting to " + args[2]);
 			try {
-				emily.connect(args[2]);
+				bot.connect(args[2]);
 			} catch (Exception e) {
 				logError(e);
 			}
-			if (emily.isConnected() && args.length > 3) {
+			if (bot.isConnected() && args.length > 3) {
 				String[] channels = Arrays.copyOfRange(args, 3, args.length);
 				for (String channel : channels)
-					emily.joinChannel(channel);
+					bot.joinChannel(channel);
 			}
 		}
 
-		while (emily.isConnected()) {
+		// Console Messages have to be reworked
+		/*while (emily.isConnected()) {
 			try {
 				emily.onConsoleMessage(reader.readLine());
 			} catch (IOException e) {
 				logError(e);
 			}
-		}
+		}*/
 	}
 
 	private static void logError(Exception e) {
