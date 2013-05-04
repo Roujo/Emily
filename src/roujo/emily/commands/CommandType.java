@@ -11,14 +11,9 @@ public enum CommandType {
 	Hats(new HatsCommand()),
 	Echo(new EchoCommand()),
 	
-	Voice(new VoiceCommand());
+	Voice(new VoiceCommand()),
 	
-	public static Command getByName(String name) {
-		for(CommandType type : CommandType.values())
-			if(type.getCommand().getName().equals(name))
-				return type.getCommand();
-		return null;
-	}
+	Lion(new LionCommand());
 	
 	private final Command command;
 	

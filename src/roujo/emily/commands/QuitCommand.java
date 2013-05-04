@@ -7,11 +7,11 @@ import roujo.emily.Context;
 public class QuitCommand extends Command {
 
 	protected QuitCommand() {
-		super("quit", "Tells Emily to disconnect from the server.", "quit", true);
+		super("quit", "quit", "Tells Emily to disconnect from the server.", "quit", true);
 	}
 
 	@Override
-	public boolean execute(Context context, String arguments) {
+	public boolean execute(Context context) {
 		PircBotX bot = context.getBot();
 		sendMessageBack(context, "Alright, off I go!");
 		context.getState().setShouldQuit(true);

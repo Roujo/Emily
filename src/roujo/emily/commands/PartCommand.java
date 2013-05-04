@@ -8,11 +8,12 @@ import roujo.emily.Context;
 public class PartCommand extends Command {
 
 	protected PartCommand() {
-		super("part", "Parts with the given channel", "part #channel reason", true);
+		super("part", "part (?<args>.*)", "Parts with the given channel", "part #channel reason", true);
 	}
 
 	@Override
-	public boolean execute(Context context, String arguments) {
+	public boolean execute(Context context) {
+		String arguments = getArguments(context);
 		if(arguments.equals("")) {
 			sendUsageBack(context);
 			return false;

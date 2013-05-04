@@ -8,13 +8,13 @@ import roujo.emily.util.StringHelper;
 public class JoinCommand extends Command {
 
 	protected JoinCommand() {
-		super("join", "Joins the given channel.", "join #channel", true);
+		super("join", "join (?<args>.*)", "Joins the given channel.", "join #channel", true);
 	}
 	
 	@Override
-	public boolean execute(Context context, String arguments) {
+	public boolean execute(Context context) {
 		// Validating arguments
-		String[] channels = StringHelper.keepChannels(arguments.split(" "));
+		String[] channels = StringHelper.keepChannels(getArguments(context).split(" "));
 		if(channels.length == 0) {
 			logError(context, "No valid channels were passed.");
 			return false;

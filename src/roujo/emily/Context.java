@@ -16,6 +16,7 @@ public class Context {
 	private final User user;
 	private final InternalUser internalUser;
 	private final String message;
+	private String processedMessage;
 
 	public Context(State state, MessageEvent<PircBotX> event) {
 		this(state, event.getBot(), event.getChannel(), event.getUser(), event.getMessage());
@@ -32,6 +33,7 @@ public class Context {
 		this.user = user;
 		this.internalUser = UserHelper.getUserByNick(user.getNick());
 		this.message = message;
+		this.processedMessage = null;
 	}
 	
 	public State getState() {
@@ -56,6 +58,18 @@ public class Context {
 
 	public String getMessage() {
 		return message;
+	}
+	
+	public boolean hasBeenProcessed() {
+		return processedMessage != null;
+	}
+	
+	public String getProcessedMessage() {
+		return processedMessage;
+	}
+	
+	public void setProcessedMessage(String processedMessage) {
+		this.processedMessage = processedMessage;
 	}
 	
 	public boolean isPrivateMessage() {

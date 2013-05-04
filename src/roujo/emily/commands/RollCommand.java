@@ -1,49 +1,44 @@
 package roujo.emily.commands;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import roujo.emily.Context;
-import roujo.emily.util.StringHelper;
 
 public class RollCommand extends Command {
-
+	private final Pattern dicePattern;
+	
 	protected RollCommand() {
-		super("roll", "Rolls a certain amount of dice and gives the result.",
-				"dice 2d20 [#channel]", false);
+		super("roll", "roll (?<args>[0-9]+d[0-9]+)",
+				"Rolls a certain amount of dice and gives the result.",
+				"dice 2d20", false);
+		dicePattern = Pattern.compile("([0-9]+)d([0-9]+)");
 	}
 
 	@Override
-	public boolean execute(Context context, String arguments) {
+	public boolean execute(Context context) {
+		String arguments = getArguments(context);
 		if (arguments.equals("")) {
 			sendUsageBack(context);
 			return false;
 		}
 
-		String[] args = arguments.split(" ");
-		if (!args[0].matches("[0-9]+d[0-9]+")) {
+		Matcher matcher = dicePattern.matcher(arguments);
+		if (!matcher.matches()) {
 			sendUsageBack(context);
 			return false;
 		}
 
-		String[] diceParts = args[0].split("d");
-		int diceNumber = Integer.parseInt(diceParts[0]);
-		int diceType = Integer.parseInt(diceParts[1]);
+		int diceNumber = Integer.parseInt(matcher.group(1));
+		int diceType = Integer.parseInt(matcher.group(2));
 		Random random = new Random();
 		int total = 0;
 		for (int i = 0; i < diceNumber; ++i) {
 			total += random.nextInt(diceType) + 1;
 		}
-		String response = "Results of " + args[0] + ": " + total;
-		
-		if(args.length > 1) {
-			if(!StringHelper.isChannel(args[1])) {
-				sendUsageBack(context);
-				return false;
-			}
-			context.getBot().sendMessage(args[1], response);
-		} else {
-			sendMessageBack(context, response);
-		}
+		String response = "Results of " + arguments + ": " + total;
+		sendMessageBack(context, response);
 		return true;
 	}
 
