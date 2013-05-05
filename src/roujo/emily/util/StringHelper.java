@@ -1,16 +1,16 @@
 package roujo.emily.util;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
 import roujo.emily.Context;
 
 public class StringHelper {
 	private static final String defaultPrefixPattern = "(?:%s(?::|,) |%%)(.*)";
-	private static Map<String, Pattern> patterns = new HashMap<String, Pattern>();
+	private static Map<String, Pattern> patterns = new TreeMap<String, Pattern>();
 	
 	public static Pattern getPatternFromNick(String nick) {
 		if(!patterns.containsKey(nick)) {
