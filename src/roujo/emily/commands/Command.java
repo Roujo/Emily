@@ -50,9 +50,14 @@ public abstract class Command {
 		if (context.hasBeenProcessed()) {
 			strippedMessage = context.getProcessedMessage();
 		} else {
-			strippedMessage = StringHelper
+			Matcher matcher = StringHelper
 					.getPatternFromNick(context.getBot().getNick())
-					.matcher(context.getMessage()).group(1);
+					.matcher(context.getMessage());
+			if(matcher.matches())
+				strippedMessage = matcher.group(1);
+			else
+				strippedMessage = context.getMessage();
+			context.setProcessedMessage(strippedMessage);
 		}
 		Matcher matcher = getPattern().matcher(strippedMessage);
 		if(matcher.matches())
