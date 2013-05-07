@@ -13,7 +13,8 @@ public enum CommandType {
 	
 	Voice(new VoiceCommand()),
 	
-	Lion(new LionCommand());
+	Lion(new LionCommand()),
+	Slap(new SlapCommand());
 	
 	private final Command command;
 	
