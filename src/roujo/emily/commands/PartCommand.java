@@ -3,7 +3,7 @@ package roujo.emily.commands;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 
 public class PartCommand extends Command {
 
@@ -12,7 +12,7 @@ public class PartCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(MessageContext context) {
 		String arguments = getArguments(context);
 		if(arguments.equals("")) {
 			sendUsageBack(context);

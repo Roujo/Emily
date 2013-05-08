@@ -2,7 +2,7 @@ package roujo.emily.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 
 public class TellCommand extends Command {
 	protected TellCommand() {
@@ -12,7 +12,7 @@ public class TellCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(MessageContext context) {
 		String arguments = getArguments(context);
 		int firstSpace = arguments.indexOf(' ');
 		if (firstSpace == -1) {

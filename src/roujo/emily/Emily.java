@@ -37,7 +37,7 @@ public class Emily extends ListenerAdapter<PircBotX> {
 		if (state.shouldQuit())
 			return;
 
-		Context context = new Context(state, event);
+		MessageContext context = new MessageContext(state, event);
 		CommandHandler.processMessage(context);
 	}
 
@@ -47,7 +47,7 @@ public class Emily extends ListenerAdapter<PircBotX> {
 		if (state.shouldQuit())
 			return;
 
-		Context context = new Context(state, event);
+		MessageContext context = new MessageContext(state, event);
 		CommandHandler.processMessage(context);
 	}
 

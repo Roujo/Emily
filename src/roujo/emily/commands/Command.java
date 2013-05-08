@@ -3,7 +3,7 @@ package roujo.emily.commands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 import roujo.emily.util.InternalUser;
 import roujo.emily.util.StringHelper;
 
@@ -43,9 +43,9 @@ public abstract class Command {
 		return isSuperUserOnly;
 	}
 
-	public abstract boolean execute(Context context);
+	public abstract boolean execute(MessageContext context);
 
-	protected String getArguments(Context context) {
+	protected String getArguments(MessageContext context) {
 		String strippedMessage;
 		if (context.hasBeenProcessed()) {
 			strippedMessage = context.getProcessedMessage();
@@ -66,7 +66,7 @@ public abstract class Command {
 			return "";
 	}
 
-	protected boolean isValidSender(Context context) {
+	protected boolean isValidSender(MessageContext context) {
 		InternalUser internalUser = context.getInternalUser();
 		if (isSuperUserOnly) {
 			return internalUser != null && internalUser.isSuper();
@@ -75,11 +75,11 @@ public abstract class Command {
 		}
 	}
 
-	protected void logError(Context context, String message) {
+	protected void logError(MessageContext context, String message) {
 		context.getBot().sendMessage(context.getUser(), message);
 	}
 
-	protected void sendMessageBack(Context context, String message) {
+	protected void sendMessageBack(MessageContext context, String message) {
 		// Add a little love
 		InternalUser user = context.getInternalUser();
 		if (user != null && user.isOwner())
@@ -92,7 +92,7 @@ public abstract class Command {
 					context.getUser().getNick() + ": " + message);
 	}
 
-	protected void sendUsageBack(Context context) {
+	protected void sendUsageBack(MessageContext context) {
 		sendMessageBack(context, usage);
 	}
 }

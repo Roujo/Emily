@@ -3,11 +3,11 @@ package roujo.emily.commands;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 import roujo.emily.util.StringHelper;
 
 public class CommandHandler {
-	public static boolean processMessage(Context context) {
+	public static boolean processMessage(MessageContext context) {
 		Matcher matcher = StringHelper.getPatternFromNick(context.getBot().getNick()).matcher(context.getMessage());
 		
 		String message;

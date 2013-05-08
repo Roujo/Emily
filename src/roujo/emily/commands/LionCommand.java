@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 
 public class LionCommand extends Command {
 	private Calendar nextLionAllowed;
@@ -14,7 +14,7 @@ public class LionCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(MessageContext context) {
 		if (nextLionAllowed == null
 				|| Calendar.getInstance().after(nextLionAllowed)) {
 			String target = context.isPrivateMessage() ? context.getUser()

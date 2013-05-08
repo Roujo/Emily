@@ -1,6 +1,6 @@
 package roujo.emily.commands;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 
 public class VoiceCommand extends Command {
 
@@ -10,7 +10,7 @@ public class VoiceCommand extends Command {
 	}
 
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(MessageContext context) {
 		String arguments = getArguments(context);
 		if (context.isPrivateMessage() && arguments.matches("#[^ ,]+ [^# ,]+"))
 			context.getBot().sendMessage("ChanServ", "voice " + arguments);

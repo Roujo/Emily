@@ -9,7 +9,7 @@ import org.pircbotx.hooks.events.PrivateMessageEvent;
 import roujo.emily.util.InternalUser;
 import roujo.emily.util.UserHelper;
 
-public class Context {
+public class MessageContext {
 	private final State state;
 	private final PircBotX bot;
 	private final Channel channel;
@@ -18,15 +18,15 @@ public class Context {
 	private final String message;
 	private String processedMessage;
 
-	public Context(State state, MessageEvent<PircBotX> event) {
+	public MessageContext(State state, MessageEvent<PircBotX> event) {
 		this(state, event.getBot(), event.getChannel(), event.getUser(), event.getMessage());
 	}
 
-	public Context(State state, PrivateMessageEvent<PircBotX> event) {
+	public MessageContext(State state, PrivateMessageEvent<PircBotX> event) {
 		this(state, event.getBot(), null, event.getUser(), event.getMessage());
 	}
 	
-	public Context(State state, PircBotX bot, Channel channel, User user, String message) {
+	public MessageContext(State state, PircBotX bot, Channel channel, User user, String message) {
 		this.state = state;
 		this.bot = bot;
 		this.channel = channel;

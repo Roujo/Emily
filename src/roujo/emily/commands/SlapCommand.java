@@ -2,7 +2,7 @@ package roujo.emily.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 
 public class SlapCommand extends Command {	
 	protected SlapCommand() {
@@ -10,7 +10,7 @@ public class SlapCommand extends Command {
 	}
 	
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(MessageContext context) {
 		// Validating arguments
 		String targetUser = getArguments(context).split(" ")[0];
 		

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 
 public class StringHelper {
 	private static final String defaultPrefixPattern = "(?:%s(?::|,) |%%)(.*)";
@@ -37,7 +37,7 @@ public class StringHelper {
 		return channels.toArray(channelArray);
 	}
 	
-	public static String removeMessageFlags(Context context, String message) {
+	public static String removeMessageFlags(MessageContext context, String message) {
 		String botNick = context.getBot().getNick();
 		if (message.startsWith("%")) {
 			// Emily was called by prefix

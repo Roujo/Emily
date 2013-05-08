@@ -2,7 +2,7 @@ package roujo.emily.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.Context;
+import roujo.emily.MessageContext;
 import roujo.emily.util.StringHelper;
 
 public class JoinCommand extends Command {
@@ -12,7 +12,7 @@ public class JoinCommand extends Command {
 	}
 	
 	@Override
-	public boolean execute(Context context) {
+	public boolean execute(MessageContext context) {
 		// Validating arguments
 		String[] channels = StringHelper.keepChannels(getArguments(context).split(" "));
 		if(channels.length == 0) {
