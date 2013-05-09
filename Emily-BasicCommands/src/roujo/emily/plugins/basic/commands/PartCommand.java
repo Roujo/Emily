@@ -3,12 +3,12 @@ package roujo.emily.plugins.basic.commands;
 import org.pircbotx.Channel;
 import org.pircbotx.PircBotX;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class PartCommand extends Command {
 
-	protected PartCommand() {
+	public PartCommand() {
 		super("part", "part (?<args>.*)", "Parts with the given channel", "part #channel reason", true);
 	}
 

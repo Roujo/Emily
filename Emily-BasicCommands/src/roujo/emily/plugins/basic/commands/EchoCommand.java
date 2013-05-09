@@ -1,11 +1,11 @@
 package roujo.emily.plugins.basic.commands;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class EchoCommand extends Command {
 
-	protected EchoCommand() {
+	public EchoCommand() {
 		super("Echo", "echo (?<args>.*)", "Repeats after you.", "echo something or other", false);
 	}
 

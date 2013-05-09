@@ -1,11 +1,11 @@
 package roujo.emily.plugins.basic.commands;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class VoiceCommand extends Command {
 
-	protected VoiceCommand() {
+	public VoiceCommand() {
 		super("voice", "voice (?<args>.*)", "Voices a user",
 				"voice user | voice #channel user", false);
 	}

@@ -2,11 +2,11 @@ package roujo.emily.plugins.basic.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class TellCommand extends Command {
-	protected TellCommand() {
+	public TellCommand() {
 		super("tell", "tell (?<args>.*)",
 				"Tells something to a certain channel or user.",
 				"tell [#channel|user] something", true);

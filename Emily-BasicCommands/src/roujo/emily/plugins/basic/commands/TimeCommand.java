@@ -1,11 +1,11 @@
 package roujo.emily.plugins.basic.commands;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class TimeCommand extends Command {
 
-	protected TimeCommand() {
+	public TimeCommand() {
 		super("time", "time", "Gives the current time.", "time", false);
 	}
 

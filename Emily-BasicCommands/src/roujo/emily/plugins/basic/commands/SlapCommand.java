@@ -2,11 +2,11 @@ package roujo.emily.plugins.basic.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class SlapCommand extends Command {	
-	protected SlapCommand() {
+	public SlapCommand() {
 		super("slap", "slap (?<args>.*)", "Slaps the given user", "slap user", false);
 	}
 	

@@ -4,13 +4,13 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class RollCommand extends Command {
 	private final Pattern dicePattern;
 	
-	protected RollCommand() {
+	public RollCommand() {
 		super("roll", "roll (?<args>[0-9]+d[0-9]+)",
 				"Rolls a certain amount of dice and gives the result.",
 				"dice 2d20", false);

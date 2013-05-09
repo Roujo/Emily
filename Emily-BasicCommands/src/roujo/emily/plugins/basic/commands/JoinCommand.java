@@ -2,13 +2,13 @@ package roujo.emily.plugins.basic.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
-import roujo.emily.util.StringHelper;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
+import roujo.emily.core.util.StringHelper;
 
 public class JoinCommand extends Command {
 
-	protected JoinCommand() {
+	public JoinCommand() {
 		super("join", "join (?<args>.*)", "Joins the given channel.", "join #channel", true);
 	}
 	

@@ -2,12 +2,12 @@ package roujo.emily.plugins.basic.commands;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class QuitCommand extends Command {
 
-	protected QuitCommand() {
+	public QuitCommand() {
 		super("quit", "quit", "Tells Emily to disconnect from the server.", "quit", true);
 	}
 

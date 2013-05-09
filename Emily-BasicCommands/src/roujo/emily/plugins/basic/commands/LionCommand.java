@@ -4,13 +4,13 @@ import java.util.Calendar;
 
 import org.pircbotx.PircBotX;
 
-import roujo.emily.MessageContext;
-import roujo.emily.commands.Command;
+import roujo.emily.core.MessageContext;
+import roujo.emily.core.commands.Command;
 
 public class LionCommand extends Command {
 	private Calendar nextLionAllowed;
 
-	protected LionCommand() {
+	public LionCommand() {
 		super(">:3", ".*>:3.*", "...is that a lion?", ">:3]", false);
 	}
 
